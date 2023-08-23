@@ -50,8 +50,8 @@
                       <input type="text" class="form-control form-control-sm rounded-0" reqiured="" name="firstname" id="firstname">
                   </div>
                   <div class="form-group">
-                      <label for="middlename" class="control-label">Middle Name</label>
-                      <input type="text" class="form-control form-control-sm rounded-0" name="middlename" id="middlename">
+                      <label for="middlename" class="control-label">phone</label>
+                      <input type="text" class="form-control form-control-sm rounded-0" name="middlename" id="middlename" placeholder="254798 222 717" maxlength="12" minlength="12">
                   </div>
                   <div class="form-group">
                       <label for="lastname" class="control-label">Last Name</label>

@@ -98,34 +98,47 @@ if(isset($_GET['id'])){
             }
             start_loader()
             $.ajax({
-                url:_base_url_+"classes/Master.php?f=save_post",
-                method:'POST',
-                type:'POST',
-                data:new FormData($(this)[0]),
-                dataType:'json',
-                cache:false,
-                processData:false,
+                url: _base_url_ + "classes/Master.php?f=save_post",
+                method: 'POST',
+                data: new FormData($(this)[0]),
+                dataType: 'json',
+                cache: false,
+                processData: false,
                 contentType: false,
-                error:err=>{
-                    console.log(err)
-                    alert('An error occurred')
-                    end_loader()
+                error: function (err) {
+                    console.log(err);
+                    alert('An error occurred');
+                    end_loader();
                 },
-                success:function(resp){
-                    if(resp.status == 'success'){
-                    location.replace('./?p=posts/view_post&id='+resp.pid)
-                    }else if(!!resp.msg){
-                        el.html(resp.msg)
-                        el.show('slow')
-                        _this.prepend(el)
-                        $('html, body').scrollTop(0)
-                    }else{
-                        alert('An error occurred')
-                        console.log(resp)
+                success: function (resp) {
+                    if (resp.status == 'success') {
+                        $.ajax({
+                            url: _base_url_ + "sms_api.php",
+                            method: 'POST',
+                            dataType: 'json',
+                            error: function (nestedErr) {
+                                console.log('Nested AJAX error:', nestedErr);
+                                alert('An error occurred in nested request: ' + nestedErr.statusText);
+                            },
+                            success: function (nestedResp) {
+                                console.log('Nested AJAX success:', nestedResp);
+                            }
+                        });
+
+                        location.replace('./?p=posts/view_post&id=' + resp.pid);
+                    } else if (!!resp.msg) {
+                        el.html(resp.msg);
+                        el.show('slow');
+                        _this.prepend(el);
+                        $('html, body').scrollTop(0);
+                    } else {
+                        alert('An error occurred');
+                        console.log(resp);
                     }
-                    end_loader()
+                    end_loader();
                 }
-            })
+            });
+
         })
     })
 </script>

@@ -31,9 +31,12 @@
 </style>
 <section class="py-3">
     <div class="container">
+    
+        
+        
         <div class="row">
             <div class="col-md-12">
-                <div id="carouselExampleControls" class="carousel slide bg-dark" data-ride="carousel">
+                <div id="carouselExampleControls" class="carousel slide bg-dark" data-ride="carousel" style="height: 60vh">
                     <div class="carousel-inner">
                         <?php 
                             $upload_path = "uploads/banner";
@@ -63,6 +66,7 @@
                     </div>
             </div>
         </div>
+
         <div class="row justify-content-center my-4">
             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
                 <div class="input-group input-group-lg" id="search-field">
@@ -73,6 +77,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-1 gx-2 gy-2">
             <?php 
             $posts = $conn->query("SELECT p.*, c.name as `category` FROM `post_list` p inner join category_list c on p.category_id = c.id where p.status = 1  and p.`delete_flag` = 0 order by abs(unix_timestamp(p.date_created)) desc");
@@ -94,9 +99,17 @@
             </div>
             <?php endwhile; ?>
         </div>
+
+
+        <div class="row mt-3">
+            <iframe src="https://resourcewatch.org/data/explore?section=All+data&selectedCollection=&zoom=3&lat=-3.3538561103591924&lng=33.62074908088324&pitch=0&bearing=0&basemap=dark&labels=light&layers=%255B%257B%2522dataset%2522%253A%25222a571044-1a31-4092-9af8-48f406f13072%2522%252C%2522opacity%2522%253A1%252C%2522layer%2522%253A%2522798d8e5d-1c6a-449a-b18e-d70e332c4311%2522%257D%255D&aoi=&page=4&sort=most-viewed&sortDirection=-1&topics=%255B%2522water%2522%255D" frameborder="0" width="100%" height="720px"></iframe>
+        </div>
+
+
     </div>
+    
 </section>
-<script>
+<script>    
     $(function(){
         $('#search').on('input', function(){
             var _search = $(this).val().toLowerCase()
